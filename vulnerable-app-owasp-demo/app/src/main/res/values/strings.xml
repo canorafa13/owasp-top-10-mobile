@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">VulnerableAppOWASPDemo</string>
+    <string name="title_login_insegura">Iniciar sesión en app insegura</string>
+    <string name="title_login_segura">Iniciar sesión en app segura</string>
+    <string name="label_user">Ingrese su usuario</string>
+    <string name="label_password">Ingrese su contraseña</string>
+    <string name="remember_password">Recordar contraseña</string>
+    <string name="btn_login">Acceder</string>
 </resources>

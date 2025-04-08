@@ -1,0 +1,17 @@
+{
+    "name": "backend-app-owasp-demo-users-nodejs",
+    "description": "Backend App OWASP Demo - Users",
+    "version": "0.0.1",
+    "main": "index.js",
+    "author": "Rafael Cano Martinez",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "license": "ISC",
+    "dependencies": {
+        "cote": "^1.0.3",
+        "knex": "0.95.11",
+        "mysql": "2.18.1",
+        "md5": "2.3.0"
+    }
+}

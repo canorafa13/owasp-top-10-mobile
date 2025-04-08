@@ -1,0 +1,24 @@
+{
+    "name": "backend-app-owasp-demo-nodejs",
+    "description": "Backend App OWASP Demo APIs",
+    "version": "0.0.1",
+    "main": "index.js",
+    "author": "Rafael Cano Martinez",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "license": "ISC",
+    "dependencies": {
+        "@hapi/hapi": "20.2.0",
+        "@hapi/inert": "6.0.4",
+        "@hapi/vision": "6.1.0",
+        "@hapi/jwt": "2.1.0",
+        "hapi-swagger": "14.2.4",
+        "hapi-cors": "1.0.3",
+        "joi": "17.4.2",
+        "cote": "1.0.3",
+        "@hapi/boom": "9.1.4",
+        "underscore": "1.13.1",
+        "md5": "2.3.0"
+    }
+}
