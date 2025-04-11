@@ -1,6 +1,10 @@
 plugins {
+    id("kotlin-kapt")
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.dagger.hilt.android)
+    alias(libs.plugins.google.services)
+
 }
 
 android {
@@ -15,6 +19,15 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+        create("release") {
+            storeFile = file("owasp-mobile.jks")
+            storePassword = System.getenv("STORE_PWD")
+            keyAlias = System.getenv("KEY_ALIAS")
+            keyPassword = System.getenv("KEY_PWD")
+        }
     }
 
     buildTypes {
@@ -35,8 +48,31 @@ android {
     }
 
     buildFeatures {
+        buildConfig = true
         viewBinding {
             enable = true
+        }
+    }
+
+    flavorDimensions += "version"
+    productFlavors {
+        create("insecure"){
+            dimension = "version"
+            applicationIdSuffix = ".insecure"
+            versionNameSuffix = "-insecure"
+            buildConfigField("String","API_KEY_X", "\"Alza_safd9209jfw893293823\"")
+            buildConfigField("String", "URL_API_BACKEND", "\"http://localhost:4321/\"")
+        }
+        create("secure"){
+            dimension = "version"
+            applicationIdSuffix = ".secure"
+            versionNameSuffix = "-secure"
+            signingConfig = signingConfigs.getByName("release")
+
+            buildConfigField("String","API_KEY_X", "\"\"")
+            buildConfigField("String", "URL_API_BACKEND", "\"\"")
+
+
         }
     }
 }
@@ -48,6 +84,13 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.gson)
+    implementation(libs.dagger.hilt.android)
+    implementation(libs.firebase.config)
+    implementation(libs.lifecycle.viewmodel.ktx)
+    implementation(platform(libs.firebase.bom))
+    kapt(libs.dagger.hilt.android.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

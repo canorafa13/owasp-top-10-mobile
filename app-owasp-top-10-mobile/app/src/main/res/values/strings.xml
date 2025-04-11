@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">VulnerableAppOWASPDemo</string>
+    <string name="app_name">OWASP Top 10 Mobile</string>
     <string name="title_login_insegura">Iniciar sesión en app insegura</string>
     <string name="title_login_segura">Iniciar sesión en app segura</string>
     <string name="label_user">Ingrese su usuario</string>
