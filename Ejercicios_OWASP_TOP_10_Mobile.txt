@@ -1,0 +1,101 @@
+M1: uso inadecuado de credenciales
+- Almacenamiento inseguro
+	- App con almancenamiento de contraseñas en duro
+	- SOL: App con almancenamiento de contraseñas cifradas
+- Transmisión sin cifrar
+	- App y API con datos sensibles en texto plano
+	- SOL: App y API con datos sensibles cifrados
+- Politicas de contraseñas debiles
+	- App y API con contraseñas debiles y faciles de adivinar
+	- SOL: App y API con una fuerte politica de contraseñas
+- Credenciales codificadas
+	- App con credenciales de API codificadas en la app
+	- SOL: App sin credenciales codificadas, provenientes de FirebaseConfig
+
+M2: Seguridad inadecuada de la cadena de suministro
+- Inyección de código malicioso
+	- Código malicioso durante el desarrollo.
+	- SOL: Realizar pruebas exaustivas.
+- Explotación de vulnerabilidades de terceros
+	- App con una libreria deprecada o con vulnerablidad detectada
+	- SOL: libreria actualizada con vulnerabilidades cubiertas
+- Credenciales comprometidas
+	- App con una libreria que lee credenciales de APIs y la envia a un servidor privado
+	- SOL: no usar librerias de terceros de procedencia no comprobada, validar que no haga llamadas o ejecute.
+
+M3: Autenticación/autorización insegura
+- Politica de contraseña debiles
+	- Registro con contraseña debil y backend lo permite
+	- SOL: App con validacion de contraseña y backend con validacion similar, politica robusta.
+- Transmisión de roles
+	- App envia una consulta de usuarios con el rol de estandar (devuelve, usuarios), se manipula con usuario root (devuelve usuarios, correo, telefono, nomina, nombre completo)
+	- SOL: La app no envia roles, solo usuario, el backend debe realizar las validaciones y busquedas correspondientes.
+- Referencia directa de objetos insegura
+	- La App envia una consulta sin JWT para un usuario, y se manipula para enviar la consulta para otro usuario sin autorizacion
+	- SOL: la app envia una consulta con JWT sin datos que vinculen al usuario, y al manipularlo, la consulta no procede.
+- Solicitudes de servicio ocultas
+	- La App hace consulta de servicios sin autenticacion. El backend las acepta y el atacante se da cuenta para vulnerarlas. Ejemplo obtener datos de tarjetas con la consulta del nombre de usuario.
+	- SOL: La app y el backend se comunican a traves de JWT para validar que el usuario ha sido autenticado.
+- Dependencia de la interfaz
+	- La App muestra a un usuario estandar que no puede eliminar a otros usuarios del proyecto, sin embargo manipulando la llegada de datos el atacante 
+		cambia la respuesta para que la app muestre las opciones de eliminar o editar.
+	- SOL: La App debe realizar validacion más robustas de acuerdo a la autenticacion, junto con el backend.
+
+M4: Validacion de entrada/salida insuficiente
+- Inyección SQL
+	- La APP permite la inyeccion de SQL sin validacion en el login.
+	- SOL: validar el tipo de dato en la entrada de la app.
+- Inyectar comandos maliciosos
+	- La APP permite realizar un listado de archivos que se encuentran en el servidor. El atacante se da cuenta y no solo lista los archivos sino que los comprime con contraseña y los borra.
+	- SOL: la app no debe mandar comandos hacia el servidor.
+- Inyección en la salida de JS, HTML para otra entrada de usuarios.
+	- La App permite realizar una serie de acciones como comandos JS como usuario ADMIN. El atacante se da cuenta y la intercepta para modificarla
+	- SOL: la app no debe realizar comandos.
+
+M5: Comunicación insegura de datos
+- Redes WIFI fraudulentas
+	- La APP manda y recibe datos en texto plano
+	- SOL: La app manda y recibe datos codificados
+- Validacion de certificado
+	- La APP no valida el certificado, permite conexiones HTTP
+	- SOL: La APP valida certificados, solo permite conexiones HTTPS, el backend permite las conexiones a traves de clientes especificos.
+
+M6: Controles de privacidad inadecuados
+- Saneamientos inadecuado de registros y mensajes de error
+	- La APP genera registros de errores con datos sensibles del cliente en textos
+	- SOL: La app genera registro de errores sin datos sensibles del cliente
+- Datos en la URL
+	- La APP llama una URL con datos sensibles en la URL.
+	- SOL: Llamar las URL sin datos sensibles o con body cifrado.
+- Copias de seguridad
+	- La APP configura hasFragileUserData como true, tras desintalar, un atacante se hace del dispositivo y obtiene la copia de seguridad con datos sensibles
+	- SOL: La APP configura hasFragileUserData como false.
+
+M7: Protecciones binarias insuficientes
+- Robar secretos valiosos
+	- La APP tiene hardcode las APIs o credenciales de inicio de sesion, el atacante los obtiene
+	- SOL: La APP no configura hardcode API's o credenciales, provienen de remoteConfig
+- Copiar y redistribuir aplicaciones
+	- El proyecto contiene las credenciales de firma hardcode
+	- SOL: Las credenciales de firma provienen de variables de entorno
+
+M8: Configuración incorrecta de seguridad
+- Seguridad demasido permisiva
+	- La app permite la generacion de contraseñas debiles y el backend tambien
+	- SOL: La APP no permite la generación de credenciales débiles
+- Otorga demasiados permisos de los necesarios
+	- La app solicita el permiso de ubicación sin necesitarla, un atacante puede rastrear a una victima
+	- SOL: La app solicita solo los permisos que necesita y no más
+
+M9: Almacenamiento inseguro de datos
+- Dejar la puerta sin llave
+	- La app deja en texto plano las contraseñas
+	- SOL: La APP no deja en texto plano las contraseñas, solicita FaceID o huella para poder obtener datos almacenados
+
+M10: Criptografia debil
+- Cifrado debil
+	- La APP usa cifrado debil, buscar en internet cuales son y como vulnerarlas
+	- SOL: La APP usa cifrado robusto
+- Almacenamiento de claves de cifrado
+	- La app almacena la clave de cifrado en el storage
+	- SOL: La APP no debe almacenar la clave de cifrado localmente
