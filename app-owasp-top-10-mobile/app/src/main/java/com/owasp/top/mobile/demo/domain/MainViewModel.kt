@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.owasp.top.mobile.demo.data.IOResult
 import com.owasp.top.mobile.demo.data.Login
-import com.owasp.top.mobile.demo.data.ResponseBase
 import com.owasp.top.mobile.demo.domain.repository.OwaspRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -20,6 +19,15 @@ class MainViewModel @Inject constructor(
 
     fun responseObservable(): LiveData<Login.Response?> = _response
 
+    private val _username = MutableLiveData<String?>()
+
+    fun usernameObservable(): LiveData<String?> = _username
+
+
+    private val _password = MutableLiveData<String?>()
+
+    fun passwordObservable(): LiveData<String?> = _password
+
     private val _error = MutableLiveData<String>()
 
     fun errorObservale(): LiveData<String> = _error
@@ -30,9 +38,9 @@ class MainViewModel @Inject constructor(
             when(result) {
                 is IOResult.Success -> {
                     if (remember) {
-                        // Guardar en base de datos
+                        owaspRepository.saveCredentials(username, password)
                     } else {
-                        // Borrar de la base de datos
+                        owaspRepository.saveCredentials("", "")
                     }
                     _response.postValue(result.data?.data)
                 }
@@ -41,6 +49,18 @@ class MainViewModel @Inject constructor(
                 }
                 else -> Unit
             }
+        }
+    }
+
+    fun getCredentials(){
+        viewModelScope.launch {
+            val result = owaspRepository.getCredentialsSaved() as IOResult.Success
+
+            result.data?.let {
+                _username.postValue(it.first)
+                _password.postValue(it.second)
+            }
+
         }
     }
 }

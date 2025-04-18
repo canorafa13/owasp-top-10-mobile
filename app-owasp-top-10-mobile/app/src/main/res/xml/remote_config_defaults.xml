@@ -6,6 +6,14 @@
     </entry>
     <entry>
         <key>url_api_backend</key>
+        <value>https://server.exemple.com/</value>
+    </entry>
+    <entry>
+        <key>sp_keystore_alias</key>
+        <value/>
+    </entry>
+    <entry>
+        <key>sp_key_size</key>
         <value/>
     </entry>
 </defaults>

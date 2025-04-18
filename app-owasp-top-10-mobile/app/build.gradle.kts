@@ -19,6 +19,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders["appLabel"] = "@string/app_name"
     }
 
     signingConfigs {
@@ -57,13 +58,16 @@ android {
     flavorDimensions += "version"
     productFlavors {
         create("insecure"){
+            manifestPlaceholders["appLabel"] = "OWASP Insecure"
             dimension = "version"
             applicationIdSuffix = ".insecure"
             versionNameSuffix = "-insecure"
             buildConfigField("String","API_KEY_X", "\"Alza_safd9209jfw893293823\"")
-            buildConfigField("String", "URL_API_BACKEND", "\"http://localhost:4321/\"")
+            buildConfigField("String", "URL_API_BACKEND", "\"https://192.168.100.16:4321/\"")
         }
         create("secure"){
+            manifestPlaceholders["appLabel"] = "OWASP Secure"
+
             dimension = "version"
             applicationIdSuffix = ".secure"
             versionNameSuffix = "-secure"
@@ -90,6 +94,7 @@ dependencies {
     implementation(libs.firebase.config)
     implementation(libs.lifecycle.viewmodel.ktx)
     implementation(platform(libs.firebase.bom))
+    implementation(libs.androidx.security.crypto.ktx)
     kapt(libs.dagger.hilt.android.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

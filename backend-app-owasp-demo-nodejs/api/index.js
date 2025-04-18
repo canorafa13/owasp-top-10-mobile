@@ -2,12 +2,21 @@
     'use strict';
 
     const Hapi = require('@hapi/hapi');
-    const prefix = "/owasp-demo/api/v1"
+//    const https = require('node:https');
+//    const http = require('node:http');
+    const fs = require('node:fs');
+    const prefix = "/owasp-demo/api/v1";
+
+    const tls = {
+        key: fs.readFileSync('private-key.pem', 'utf8'),
+        cert: fs.readFileSync('localhost.cer.cer', 'utf8')
+    };      
     
     const init = async () => {
         const server = Hapi.server({
             port: process.env.PORT,
-            host: '0.0.0.0'
+            host: '0.0.0.0',
+            tls: tls,
         });
 
         const swaggerOptions = {
