@@ -4,6 +4,7 @@
     const Joi = require('joi');
     const users = require('./users');
     const handlers = require('./handlers');
+    const session = require('../sessions/sessions');
 
     const plugin = {
         name: "users",
@@ -39,12 +40,27 @@
                 }
             }, {
                 method: 'POST',
-                path: '/signon',
-                handler: handlers.signon,
+                path: '/loginIn',
+                handler: handlers.signInInsecure,
                 options: {
-                    description: 'User Login',
-                    notes: 'User Login',
-                    tags: ['api', 'login'],
+                    description: 'User Login Insecure',
+                    notes: 'User Login Insecure',
+                    tags: ['api', 'login', 'insecure'],
+                    validate: {
+                        payload: Joi.object({
+                            username: Joi.string().required().max(40),
+                            password: Joi.string().required().max(40),
+                        })
+                    }
+                }
+            }, {
+                method: 'POST',
+                path: '/loginSe',
+                handler: handlers.signInSecure,
+                options: {
+                    description: 'User Login Secure',
+                    notes: 'User Login Secure',
+                    tags: ['api', 'login', 'secure'],
                     validate: {
                         headers: Joi.object({
                             'api-key-x': Joi.string().required(),
@@ -70,6 +86,9 @@
             }, {
                 name: 'users.signon',
                 method: users.signon
+            }, {
+                name: 'session.create',
+                method: session.create
             }]);
         }
     }

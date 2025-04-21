@@ -8,8 +8,8 @@
     const prefix = "/owasp-demo/api/v1";
 
     const tls = {
-        key: fs.readFileSync('private-key.pem', 'utf8'),
-        cert: fs.readFileSync('localhost.cer.cer', 'utf8')
+        key: fs.readFileSync('./cert/private-key.pem', 'utf8'),
+        cert: fs.readFileSync('./cert/localhost.cer.cer', 'utf8')
     };      
     
     const init = async () => {
@@ -36,8 +36,6 @@
                 plugin: require('hapi-swagger'),
                 options: swaggerOptions
             }, {
-                plugin: require('@hapi/jwt')
-            }, {
                 plugin: require('hapi-cors'),
                 options: {
                     methods: ['POST', 'GET', 'PUT', 'DELETE']
@@ -49,8 +47,7 @@
                 plugin: require('./plugins/catalogs/index'),
                 routes: {prefix}
             }
-        ])
-
+        ]);
 
         await server.start();
         console.log('Server running on %s', server.info.uri);

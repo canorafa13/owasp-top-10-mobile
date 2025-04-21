@@ -36,13 +36,8 @@
         }
     }
 
-    exports.signon = async(req, h) => {
+    exports.signInInsecure = async(req, h) => {
         try{
-            const result = validateKey(req);
-            if(!result){
-                return Boom.unauthorized("API-KEY-X no valida");
-            }
-
             // List
             // String - message error
             
@@ -61,6 +56,38 @@
             throw respuesta;
 
         }catch(e){
+            throw Boom.internal(JSON.stringify(e));
+        }
+    }
+
+    exports.signInSecure = async (req, h) => {
+        try {
+            const isKeyValid = validateKey(req);
+            if(!isKeyValid) {
+                return Boom.unauthorized("API-KEY-X no valida");
+            }
+
+            const respuesta =  await req.server.methods.users.signon(req.payload.username, req.payload.password);
+            if(typeof respuesta == "string"){
+                return Boom.unauthorized(respuesta);
+            } else if(typeof respuesta == "object"){
+                let session = await req.server.methods.session.create(req.payload.username);
+
+                console.log("sesion " + JSON.stringify(session));
+
+                respuesta.token = session.token;
+
+                return {
+                    statusCode: 200,
+                    error: null,
+                    message: "Success",
+                    data: respuesta
+                };
+            }
+            throw respuesta;
+
+        }catch(e){
+            console.log(e);
             throw Boom.internal(JSON.stringify(e));
         }
     }

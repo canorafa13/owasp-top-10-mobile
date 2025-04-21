@@ -32,4 +32,13 @@ CREATE TABLE IF NOT EXISTS Users(
 );
 
 INSERT INTO Users(username, password, name, last_name, status, rol_id) VALUES
-('root', '1234', 'Rafael', 'Cano Martínez', 'ACTIVE', 1);
+('root', '1234', 'Rafael', 'Cano Martínez', 'ACTIVE', 1),
+('rcano', 'Prueba', 'Rafael', 'Cano Martínez', 'ACTIVE', 2),
+('canorafa', 'Prueba2', 'Rafa', 'Cano', 'ACTIVE', 3),
+('rafa', 'Prueba2', 'Rafa', 'Cano', 'INACTIVE', 3);
+
+CREATE TABLE IF NOT EXISTS Sessions(
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    username NVARCHAR(40) NOT NULL UNIQUE KEY,
+    also NVARCHAR(100) NOT NULL
+);
