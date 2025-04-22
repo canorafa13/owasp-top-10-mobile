@@ -1,16 +1,34 @@
 version: '3.1'
 
 services:
-  api:
-    container_name: backend_app_owasp_demo_api
-    image: backend_app_owasp_demo_api
-    build: ./api
+  api-secure:
+    container_name: backend_app_owasp_demo_api_secure
+    image: backend_app_owasp_demo_api_secure
+    build: ./api-secure
     command: npm run start
     env_file: .env
     restart: always
     ports:
-    - "${PORT}:${PORT}"
-
+    - "${PORT_HTTPS}:${PORT_HTTPS}"
+    - "${PORT_HTTP}:${PORT_HTTP}"
+#  api-insecure:
+#    container_name: backend_app_owasp_demo_api_insecure
+#    image: backend_app_owasp_demo_api_insecure
+#    build: ./api-insecure
+#    command: npm run start
+#    env_file: .env
+#    restart: always
+#    ports:
+#    - "${PORT_HTTP}:${PORT_HTTP}"
+#  api-mallware:
+#    container_name: backend_app_owasp_demo_api_mallware
+#    image: backend_app_owasp_demo_api_mallware
+#    build: ./api-mallware
+#    command: npm run start
+#    env_file: .env
+#    restart: always
+#    ports:
+#    - "${PORT_MALLWARE}:${PORT_MALLWARE}"
   users:
     container_name: backend_app_owasp_demo_users
     image: backend_app_owasp_demo_users

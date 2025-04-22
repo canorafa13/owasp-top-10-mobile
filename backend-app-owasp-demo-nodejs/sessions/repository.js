@@ -41,7 +41,7 @@
                 data: also,
                 username
             }, private_key, {
-                expiresIn: '3m',
+                expiresIn: '60m',
                 algorithm: 'RS512',
             });
 
@@ -96,8 +96,10 @@
                     resolve({...response, message: "Sesión comprometida, inicie sesión nuevamente para obtener un Token nuevo"});
                 });
             });
-            return await promise.then();
+            let result = await promise.then();
+            return result;
         }catch(e) {
+            console.log(e);
             return { isValid: false, message: "Sesión no comprobada"};
         }
     }
