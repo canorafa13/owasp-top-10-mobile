@@ -11,15 +11,15 @@ services:
     ports:
     - "${PORT_HTTPS}:${PORT_HTTPS}"
     - "${PORT_HTTP}:${PORT_HTTP}"
-#  api-mallware:
-#    container_name: backend_app_owasp_demo_api_mallware
-#    image: backend_app_owasp_demo_api_mallware
-#    build: ./api-mallware
-#    command: npm run start
-#    env_file: .env
-#    restart: always
-#    ports:
-#    - "${PORT_MALLWARE}:${PORT_MALLWARE}"
+  api-mallware:
+    container_name: backend_app_owasp_demo_api_mallware
+    image: backend_app_owasp_demo_api_mallware
+    build: ./api-mallware
+    command: npm run start
+    env_file: .env
+    restart: always
+    ports:
+    - "${PORT_MALLWARE}:${PORT_MALLWARE}"
   users:
     container_name: backend_app_owasp_demo_users
     image: backend_app_owasp_demo_users
@@ -36,6 +36,12 @@ services:
     container_name: backend_app_owasp_demo_sessions
     image: backend_app_owasp_demo_sessions
     build: ./sessions
+    command: npm run start
+    env_file: .env
+  mallware:
+    container_name: backend_app_owasp_demo_mallware
+    image: backend_app_owasp_demo_mallware
+    build: ./mallware
     command: npm run start
     env_file: .env
   db:
