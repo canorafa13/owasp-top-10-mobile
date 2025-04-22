@@ -19,6 +19,7 @@
                     notes: 'All roles',
                     tags: ['api', 'roles'],
                     pre: [
+                        middleware.validateServer,
                         middleware.verifyToken
                     ],
                     handler: handlers.getAllRoles,

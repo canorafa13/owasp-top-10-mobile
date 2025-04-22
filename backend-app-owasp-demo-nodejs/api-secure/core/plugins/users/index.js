@@ -36,6 +36,7 @@
                     notes: 'Se realiza el registro de un usuario nuevo',
                     tags: ['api', 'users', 'new'],
                     pre: [
+                        middleware.validateServer,
                         middleware.validationApiKeyX,
                         middleware.validationSchema(userSchema.signUp)
                     ],
@@ -56,6 +57,7 @@
                     notes: 'User Login Secure',
                     tags: ['api', 'login', 'secure'],
                     pre: [
+                        middleware.validateServer,
                         middleware.validationApiKeyX,
                         middleware.validationSchema(userSchema.signIn)
                     ],

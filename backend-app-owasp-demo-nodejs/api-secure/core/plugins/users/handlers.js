@@ -1,6 +1,5 @@
 (() => {
     'use strict';
-    const Joi = require('joi');
     const Boom = require('@hapi/boom');
     const PasswordValidator = require('password-validator');
     const cryptii = require('../../utils/cryptii');
@@ -23,10 +22,11 @@
 
     exports.signUp = async(req, h) => {
         try{
-            /// Validar que el password sea valido
+            const isSecure = req.pre.isSecure || false;
             const methods = req.server.methods;
             const payload = req.pre.payload || req.payload;
 
+            /// Validar que el password sea valido
             let schema = new PasswordValidator();
 
             schema
@@ -47,6 +47,9 @@
             payload.rol_id = 3;
 
             let respuesta = await methods.users.signUp(payload);
+            if(isSecure){
+                return baseResponse.success(await cryptii.encrypt(respuesta));
+            }
             return baseResponse.success(respuesta);
         }catch(e){
             throw Boom.notImplemented(JSON.stringify(e));
@@ -55,10 +58,11 @@
 
     exports.signIn = async (req, h) => {
         try {
+            const isSecure = req.pre.isSecure || false;
             const methods = req.server.methods;
             const payload = req.pre.payload || req.payload;
             /// Buscamos al usuario en la base de datos
-            const respuesta =  await methods.users.signIn(
+            let respuesta =  await methods.users.signIn(
                 payload.username, 
                 payload.password
             );
@@ -68,11 +72,15 @@
                 return Boom.unauthorized(respuesta);
             } else if(typeof respuesta == "object"){
                 /// Si es un objeto creamos un token de session
-                let session = await methods.session.create(
-                    payload.username
-                );
+                if(isSecure){
+                    let session = await methods.session.create(
+                        payload.username
+                    );
 
-                respuesta.token = session.token;
+                    respuesta.token = session.token;
+
+                    respuesta = await cryptii.encrypt(respuesta);
+                }
 
                 /// Retornamos la respuesta con un token de sesion
                 return baseResponse.success(respuesta);
@@ -81,7 +89,8 @@
             throw respuesta;
 
         }catch(e){
-            throw Boom.internal(JSON.stringify(e));
+            console.log(e)
+            throw Boom.notImplemented();
         }
     }
 })();

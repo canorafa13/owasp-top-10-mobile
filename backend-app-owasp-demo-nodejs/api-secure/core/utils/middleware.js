@@ -46,6 +46,16 @@
         }
     }
 
+    const _validateServer = async(req, h) => {
+        try {
+            return req.server.info.protocol === 'https' && req.server.info.port == process.env.PORT_HTTPS;
+        } catch(e){
+            throw Boom.internal();
+        }
+    }
+
+    exports.validateServer = { method: _validateServer, assign: 'isSecure' }
+
     exports.verifyToken = { method: _verifyToken, assign: 'isAuthorization' }
 
     exports.validationApiKeyX = { method: _validateKey, assign: 'isApiKeyValid' }
