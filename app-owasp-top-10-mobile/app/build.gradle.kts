@@ -63,7 +63,7 @@ android {
             applicationIdSuffix = ".insecure"
             versionNameSuffix = "-insecure"
             buildConfigField("String","API_KEY_X", "\"Alza_safd9209jfw893293823\"")
-            buildConfigField("String", "URL_API_BACKEND", "\"https://192.168.100.16:4321/\"")
+            buildConfigField("String", "URL_API_BACKEND", "\"http://192.168.0.43:80/\"")
         }
         create("secure"){
             manifestPlaceholders["appLabel"] = "OWASP Secure"
@@ -74,7 +74,7 @@ android {
             signingConfig = signingConfigs.getByName("release")
 
             buildConfigField("String","API_KEY_X", "\"\"")
-            buildConfigField("String", "URL_API_BACKEND", "\"\"")
+            buildConfigField("String", "URL_API_BACKEND", "\"https://server.domain.com/\"")
 
 
         }

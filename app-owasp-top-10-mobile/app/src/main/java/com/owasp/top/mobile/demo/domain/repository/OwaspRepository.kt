@@ -4,9 +4,11 @@ import com.owasp.top.mobile.demo.apis.OwaspInsecureApi
 import com.owasp.top.mobile.demo.apis.OwaspSecureApi
 import com.owasp.top.mobile.demo.data.IOResult
 import com.owasp.top.mobile.demo.data.Login
-import com.owasp.top.mobile.demo.data.ResponseBase
 import com.owasp.top.mobile.demo.datasource.StorageApp
+import com.owasp.top.mobile.demo.domain.base.BaseRespository
 import com.owasp.top.mobile.demo.environment.FlavorApp
+import com.owasp.top.mobile.demo.utils.HelperCipherApp
+import com.owasp.top.mobile.demo.utils.HelperCipherRSA
 import com.owasp.top.mobile.demo.utils.HelperSecure
 import javax.inject.Inject
 
@@ -14,21 +16,24 @@ class OwaspRepository @Inject constructor(
     private val helperSecure: HelperSecure,
     private val owaspSecureApi: OwaspSecureApi,
     private val owaspInsecureApi: OwaspInsecureApi,
-    private val storageApp: StorageApp
-) {
-    suspend fun login(username: String, password: String): IOResult<ResponseBase<Login.Response>?> {
-        val request = Login.Request(username, password)
-        val response = if (FlavorApp.isSecure()){
-            owaspSecureApi.login(helperSecure.apiKeyX, request)
-        } else {
-            owaspInsecureApi.login(request)
-        }
+    private val storageApp: StorageApp,
+    private val helperCipherApp: HelperCipherApp
+) : BaseRespository() {
 
-        if (response.isSuccessful){
-            return IOResult.Success(response.body())
-        }
+    suspend fun login(username: String, password: String): IOResult<Login.Response> {
+        try {
+            val request = Login.Request(username, password)
 
-        return IOResult.Error(response.message())
+            val response: Login.Response = if (FlavorApp.isSecure()) {
+                secure(helperCipherApp) { owaspSecureApi.login(helperSecure.apiKeyX, helperCipherApp.encryptAESData(request)) }
+            } else {
+                insecure { owaspInsecureApi.login(request) }
+            }
+            return IOResult.Success(response)
+        }catch (e: Exception) {
+            e.printStackTrace()
+            return IOResult.Error(e.message.toString())
+        }
     }
 
     suspend fun saveCredentials(username: String, password: String): IOResult<Boolean> {

@@ -16,9 +16,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.security.SecureRandom
@@ -28,14 +26,7 @@ import javax.net.ssl.SSLContext
 import javax.net.ssl.TrustManager
 import javax.net.ssl.X509TrustManager
 
-class MyInterceptor: Interceptor{
-    override fun intercept(p0: Interceptor.Chain): Response {
-        println(p0.request().url())
-        println(p0.request().body().toString())
-        return  p0.proceed(p0.request())
-    }
 
-}
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -101,12 +92,12 @@ object ModuleApp {
     ): SharedPreferences {
         if(FlavorApp.isSecure()){
             val spec = KeyGenParameterSpec.Builder(
-                helperSecure.spKeyStoreAlias,
+                "_androidx_security_master_key_",
                 KeyProperties.PURPOSE_ENCRYPT or KeyProperties.PURPOSE_DECRYPT
             )
                 .setBlockModes(KeyProperties.BLOCK_MODE_GCM)
                 .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_NONE)
-                .setKeySize(helperSecure.spKeySize)
+                .setKeySize(256)
                 .build()
 
             val masterKey = MasterKey.Builder(context)

@@ -12,6 +12,7 @@ sealed class Login {
         val name: String?,
         val last_name: String?,
         val url_profile: String?,
-        val status: String?
+        val status: String?,
+        val token: String?
     ) : Login()
 }

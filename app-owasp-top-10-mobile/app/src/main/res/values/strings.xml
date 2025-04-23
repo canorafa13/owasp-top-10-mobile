@@ -6,4 +6,5 @@
     <string name="label_password">Ingrese su contraseña</string>
     <string name="remember_password">Recordar contraseña</string>
     <string name="btn_login">Acceder</string>
+    <string name="owasp_top_10_mobile">OWASP TOP 10 Mobile</string>
 </resources>

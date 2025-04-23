@@ -9,19 +9,16 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.owasp.top.mobile.demo.R
 import com.owasp.top.mobile.demo.databinding.ActivityMainBinding
-import com.owasp.top.mobile.demo.di.MyInterceptor
 import com.owasp.top.mobile.demo.domain.MainViewModel
 import com.owasp.top.mobile.demo.environment.FlavorApp
 import dagger.hilt.android.AndroidEntryPoint
-import okhttp3.OkHttpClient
-import javax.inject.Inject
+
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val viewModel: MainViewModel by viewModels()
-    @Inject
-    lateinit var builder: OkHttpClient.Builder
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,8 +34,6 @@ class MainActivity : AppCompatActivity() {
         setupUI()
 
         observables()
-
-        builder.addInterceptor(MyInterceptor())
 
     }
 

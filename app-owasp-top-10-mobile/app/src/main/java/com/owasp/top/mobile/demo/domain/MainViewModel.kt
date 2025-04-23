@@ -42,7 +42,7 @@ class MainViewModel @Inject constructor(
                     } else {
                         owaspRepository.saveCredentials("", "")
                     }
-                    _response.postValue(result.data?.data)
+                    _response.postValue(result.data)
                 }
                 is IOResult.Error -> {
                     _error.postValue(result.message)

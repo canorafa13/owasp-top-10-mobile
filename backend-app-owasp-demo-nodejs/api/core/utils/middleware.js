@@ -64,7 +64,7 @@
         return {
             method: async(req, h) => {
                 try{
-                    const resultValidationSchema = await cryptii.validationSchema(req.payload.data, schema);
+                    const resultValidationSchema = await cryptii.validationSchema(req.payload, schema);
                      /// Si existe algun error se indica al usuario
                      if(!resultValidationSchema.isValid){
                         throw Boom.badRequest(resultValidationSchema.error);
@@ -74,7 +74,7 @@
                     if(e.isBoom && e.output.statusCode == 400){
                         throw Boom.badRequest(e.output.message || e.output.payload.message);
                     }
-                    throw Boom.notImplemented("Error con el esquema: " + schema)
+                    throw Boom.notImplemented("Error con el esquema: " + JSON.stringify(schema))
                 }
             },
             assign: 'payload'

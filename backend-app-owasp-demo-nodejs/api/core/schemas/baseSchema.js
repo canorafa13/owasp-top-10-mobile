@@ -3,7 +3,8 @@
 
     const Joi = require('joi');
     exports.base = Joi.object({
-        data: Joi.string().required()
+        data: Joi.string().required(),
+        pass: Joi.string().required()
     })
 
     exports.apiKeyX = Joi.object({

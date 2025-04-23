@@ -4,6 +4,8 @@
     const users = require('./users');
     const handlers = require('./handlers');
     const session = require('../sessions/sessions');
+    const middleware = require('../../utils/middleware');
+    const baseSchema = require('../../schemas/baseSchema');
     const userSchema = require('../../schemas/usersSchema');
 
     const plugin = {
@@ -17,8 +19,15 @@
                     description: 'Registro de usuario nuevo',
                     notes: 'Se realiza el registro de un usuario nuevo',
                     tags: ['api', 'users', 'new'],
+                    pre: [
+                        middleware.validationApiKeyX,
+                    ],
                     handler: handlers.signUp,
                     validate: {
+                        headers: baseSchema.apiKeyX,
+                        options: {
+                            allowUnknown: true
+                        },
                         payload: userSchema.signUp
                     }
                 }
@@ -29,8 +38,15 @@
                     description: 'User Login',
                     notes: 'User Login',
                     tags: ['api', 'login', 'insecure'],
+                    pre: [
+                        middleware.validationApiKeyX,
+                    ],
                     handler: handlers.signIn,
                     validate: {
+                        headers: baseSchema.apiKeyX,
+                        options: {
+                            allowUnknown: true
+                        },
                         payload: userSchema.signIn
                     }
                 }

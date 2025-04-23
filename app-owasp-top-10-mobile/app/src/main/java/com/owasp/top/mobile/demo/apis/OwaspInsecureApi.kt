@@ -9,7 +9,7 @@ import retrofit2.http.Headers
 import retrofit2.http.POST
 
 interface OwaspInsecureApi {
-    @POST("owasp-demo/api/v1/signon")
+    @POST("insecure/owasp-demo/api/v1/signIn")
     @Headers("api-key-x: ${BuildConfig.API_KEY_X}")
     suspend fun login(@Body request: Login.Request): Response<ResponseBase<Login.Response>>
 }

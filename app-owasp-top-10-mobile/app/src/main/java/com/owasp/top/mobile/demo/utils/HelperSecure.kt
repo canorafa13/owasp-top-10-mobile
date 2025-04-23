@@ -56,4 +56,12 @@ class HelperSecure @Inject constructor() {
     val spKeySize: Int by lazy {
         remoteConfig.getLong("sp_key_size").toInt()
     }
+
+    val rsaPrivateKey: String by lazy {
+        remoteConfig.getString("rsa_private_key")
+    }
+
+    val rsaPublicKey: String by lazy {
+        remoteConfig.getString("rsa_public_key")
+    }
 }

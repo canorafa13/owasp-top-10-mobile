@@ -6,7 +6,7 @@
     </entry>
     <entry>
         <key>url_api_backend</key>
-        <value>https://server.exemple.com/</value>
+        <value>https://server.example.com/</value>
     </entry>
     <entry>
         <key>sp_keystore_alias</key>
@@ -14,6 +14,14 @@
     </entry>
     <entry>
         <key>sp_key_size</key>
+        <value/>
+    </entry>
+    <entry>
+        <key>rsa_private_key</key>
+        <value/>
+    </entry>
+    <entry>
+        <key>rsa_public_key</key>
         <value/>
     </entry>
 </defaults>
