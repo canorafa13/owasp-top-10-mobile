@@ -58,6 +58,7 @@ android {
     flavorDimensions += "version"
     productFlavors {
         create("insecure"){
+            manifestPlaceholders["usesCleartextTraffic"] = "true"
             manifestPlaceholders["appLabel"] = "OWASP Insecure"
             dimension = "version"
             applicationIdSuffix = ".insecure"
@@ -66,6 +67,7 @@ android {
             buildConfigField("String", "URL_API_BACKEND", "\"http://192.168.0.43:80/\"")
         }
         create("secure"){
+            manifestPlaceholders["usesCleartextTraffic"] = "false"
             manifestPlaceholders["appLabel"] = "OWASP Secure"
 
             dimension = "version"

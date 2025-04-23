@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.VulnerableAppOWASPDemo"
         android:name=".OwaspTopMobileApp"
-        tools:replace="android:label"
+        tools:replace="android:label,android:usesCleartextTraffic"
+        android:usesCleartextTraffic="${usesCleartextTraffic}"
         tools:targetApi="31">
         <activity
             android:name=".ui.SplashActivity"
