@@ -15,6 +15,11 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     private val owaspRepository: OwaspRepository
 ): ViewModel(){
+
+    private val _isLoading = MutableLiveData(false)
+
+    fun isLoading(): LiveData<Boolean> = _isLoading
+
     private val _response = MutableLiveData<Login.Response?>()
 
     fun responseObservable(): LiveData<Login.Response?> = _response
@@ -32,8 +37,13 @@ class MainViewModel @Inject constructor(
 
     fun errorObservale(): LiveData<String> = _error
 
+    private val _isSuccessSignUp = MutableLiveData(false)
+
+    fun isSuccessSignUp(): LiveData<Boolean> = _isSuccessSignUp
+
     fun login(username: String, password: String, remember: Boolean = false){
         viewModelScope.launch {
+            _isLoading.postValue(true)
             val result = owaspRepository.login(username, password)
             when(result) {
                 is IOResult.Success -> {
@@ -49,6 +59,25 @@ class MainViewModel @Inject constructor(
                 }
                 else -> Unit
             }
+            _isLoading.postValue(false)
+        }
+    }
+
+    fun signUp(username: String, password: String, name: String, last_name: String, phone: String) {
+        viewModelScope.launch {
+            _isLoading.postValue(true)
+            val result = owaspRepository.signUp(username, password, name, last_name, phone)
+            when(result) {
+                is IOResult.Success -> {
+                    _isSuccessSignUp.postValue(true)
+                }
+                is IOResult.Error -> {
+                    _error.postValue(result.message)
+                }
+                else -> Unit
+            }
+
+            _isLoading.postValue(false)
         }
     }
 

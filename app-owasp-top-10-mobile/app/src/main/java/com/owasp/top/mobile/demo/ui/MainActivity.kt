@@ -11,6 +11,7 @@ import com.owasp.top.mobile.demo.R
 import com.owasp.top.mobile.demo.databinding.ActivityMainBinding
 import com.owasp.top.mobile.demo.domain.MainViewModel
 import com.owasp.top.mobile.demo.environment.FlavorApp
+import com.owasp.top.mobile.demo.ui.common.DialogLoader
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -18,6 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val viewModel: MainViewModel by viewModels()
+    private var dialogLoader: DialogLoader? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +32,8 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        dialogLoader = DialogLoader(this)
 
         setupUI()
 
@@ -57,6 +61,10 @@ class MainActivity : AppCompatActivity() {
     private fun observables(){
         viewModel.errorObservale().observe(this){
             showToast(it)
+        }
+
+        viewModel.isLoading().observe(this){
+            dialogLoader?.isLoading(it)
         }
 
         viewModel.usernameObservable().observe(this){

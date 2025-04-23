@@ -17,11 +17,11 @@ open class BaseRespository {
         throw ApiErrorException(result.message())
     }
 
-    inline fun <reified Response> BaseRespository.secure(helperCipherApp: HelperCipherApp, api: () -> retrofit2.Response<ResponseBase<ObjectCryptiiBase>>): Response {
+    inline fun <reified Response> BaseRespository.secure(cipher: HelperCipherApp, api: () -> retrofit2.Response<ResponseBase<ObjectCryptiiBase>>): Response {
         val result = api.invoke()
         if (result.isSuccessful) {
             val body = result.body()?.data ?: throw  ObjectNullException()
-            val objectResult: Response = helperCipherApp.decryptAESData(body)
+            val objectResult: Response = cipher.decryptAESData(body)
             return objectResult
 
         }

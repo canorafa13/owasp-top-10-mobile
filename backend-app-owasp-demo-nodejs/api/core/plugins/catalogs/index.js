@@ -116,7 +116,7 @@
                 }
             }, {
                 method: 'POST',
-                path: '/task/activities',
+                path: '/tasks/activities',
                 options: {
                     description: 'Crear Actividad',
                     notes: 'Crear actividad',

@@ -3,6 +3,7 @@ package com.owasp.top.mobile.demo.apis
 import com.owasp.top.mobile.demo.BuildConfig
 import com.owasp.top.mobile.demo.data.Login
 import com.owasp.top.mobile.demo.data.ResponseBase
+import com.owasp.top.mobile.demo.data.SignUp
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.Headers
@@ -12,4 +13,10 @@ interface OwaspInsecureApi {
     @POST("insecure/owasp-demo/api/v1/signIn")
     @Headers("api-key-x: ${BuildConfig.API_KEY_X}")
     suspend fun login(@Body request: Login.Request): Response<ResponseBase<Login.Response>>
+
+    @POST("insecure/owasp-demo/api/v1/signUp")
+    @Headers("api-key-x: ${BuildConfig.API_KEY_X}")
+    suspend fun signUp(
+        @Body request: SignUp.Request
+    ): Response<ResponseBase<SignUp.Response>>
 }
