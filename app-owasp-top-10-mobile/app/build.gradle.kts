@@ -64,7 +64,7 @@ android {
             applicationIdSuffix = ".insecure"
             versionNameSuffix = "-insecure"
             buildConfigField("String","API_KEY_X", "\"Alza_safd9209jfw893293823\"")
-            buildConfigField("String", "URL_API_BACKEND", "\"http://192.168.0.43:80/\"")
+            buildConfigField("String", "URL_API_BACKEND", "\"http://172.20.189.242:80/\"")
         }
         create("secure"){
             manifestPlaceholders["usesCleartextTraffic"] = "false"
@@ -97,6 +97,7 @@ dependencies {
     implementation(libs.lifecycle.viewmodel.ktx)
     implementation(platform(libs.firebase.bom))
     implementation(libs.androidx.security.crypto.ktx)
+    implementation(project(":interceptor-logger"))
     kapt(libs.dagger.hilt.android.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

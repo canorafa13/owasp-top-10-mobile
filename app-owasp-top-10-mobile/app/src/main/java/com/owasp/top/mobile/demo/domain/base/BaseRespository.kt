@@ -1,10 +1,10 @@
 package com.owasp.top.mobile.demo.domain.base
 
+import com.google.gson.Gson
 import com.owasp.top.mobile.demo.data.ObjectCryptiiBase
 import com.owasp.top.mobile.demo.data.ResponseBase
 import com.owasp.top.mobile.demo.utils.ApiErrorException
 import com.owasp.top.mobile.demo.utils.HelperCipherApp
-import com.owasp.top.mobile.demo.utils.HelperCipherRSA
 import com.owasp.top.mobile.demo.utils.ObjectNullException
 
 open class BaseRespository {
@@ -14,7 +14,8 @@ open class BaseRespository {
         if (result.isSuccessful){
             return result.body()?.data ?: throw ObjectNullException()
         }
-        throw ApiErrorException(result.message())
+        val error = Gson().fromJson(result.errorBody()?.string(), ResponseBase::class.java)
+        throw ApiErrorException(error.message ?: result.message())
     }
 
     inline fun <reified Response> BaseRespository.secure(cipher: HelperCipherApp, api: () -> retrofit2.Response<ResponseBase<ObjectCryptiiBase>>): Response {
@@ -25,6 +26,7 @@ open class BaseRespository {
             return objectResult
 
         }
-        throw ApiErrorException(result.message())
+        val error = Gson().fromJson(result.errorBody()?.string(), ResponseBase::class.java)
+        throw ApiErrorException(error.message ?: result.message())
     }
 }

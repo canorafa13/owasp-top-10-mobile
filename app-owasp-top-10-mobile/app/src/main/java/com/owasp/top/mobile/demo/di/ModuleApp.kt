@@ -6,6 +6,7 @@ import android.security.keystore.KeyGenParameterSpec
 import android.security.keystore.KeyProperties
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
+import com.interceptor.logger.sdk.LoggerInterceptor
 import com.owasp.top.mobile.demo.BuildConfig
 import com.owasp.top.mobile.demo.apis.OwaspInsecureApi
 import com.owasp.top.mobile.demo.apis.OwaspSecureApi
@@ -38,7 +39,7 @@ object ModuleApp {
 
     @Provides
     @Singleton
-    fun getUnsafeOkHttpClient(builder: OkHttpClient.Builder): OkHttpClient {
+    fun getUnsafeOkHttpClient(@ApplicationContext context: Context, builder: OkHttpClient.Builder): OkHttpClient {
         try {
             // Crea un trust manager que no valida los certificados del servidor
             val trustAllCerts = arrayOf<TrustManager>(
@@ -57,6 +58,7 @@ object ModuleApp {
 
             return builder
                 .sslSocketFactory(sslSocketFactory, trustAllCerts[0] as X509TrustManager)
+                .addInterceptor(LoggerInterceptor(context))
                 .hostnameVerifier { _, _ -> true }
                 .build()
         } catch (e: Exception) {

@@ -21,3 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "app-owasp-top-10-mobile"
 include(":app")
+include(":interceptor-logger")

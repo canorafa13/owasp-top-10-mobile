@@ -5,83 +5,81 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="20dp"
     tools:context=".ui.MainActivity">
-
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="@string/title_login_insegura"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:textSize="50sp"
-        android:textStyle="bold"
-        android:layout_marginTop="30dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/user"
-        app:layout_constraintStart_toStartOf="parent"
-        app:hintAnimationEnabled="true"
-        app:hintEnabled="true"
-        android:layout_marginTop="10dp"
-        android:hint="@string/label_user"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content">
-        <com.google.android.material.textfield.TextInputEditText
-            android:maxLines="1"
-            android:imeOptions="actionNext"
-            android:inputType="text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/password"
-        app:hintAnimationEnabled="true"
-        app:hintEnabled="true"
-        android:layout_marginTop="10dp"
-        android:hint="@string/label_password"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/user"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content">
-        <com.google.android.material.textfield.TextInputEditText
-            android:maxLines="1"
-            android:imeOptions="actionDone"
-            android:inputType="textPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
     <LinearLayout
-        android:orientation="horizontal"
-        android:id="@+id/rememberMeLayout"
-        android:layout_marginTop="10dp"
+        android:layout_margin="10dp"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:orientation="vertical"
         android:layout_width="0dp"
         android:layout_height="wrap_content">
-        <CheckBox
-            android:id="@+id/rememberMe"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
         <TextView
-            android:text="@string/remember_password"
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="@string/title_login_insegura"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            android:layout_marginTop="30dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/user"
+            app:hintAnimationEnabled="true"
+            app:hintEnabled="true"
+            android:layout_marginTop="40dp"
+            android:hint="@string/label_user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:maxLines="1"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/password"
+            app:hintAnimationEnabled="true"
+            app:hintEnabled="true"
+            android:layout_marginTop="10dp"
+            android:hint="@string/label_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:maxLines="1"
+                android:imeOptions="actionDone"
+                android:inputType="textPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:id="@+id/rememberMeLayout"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <CheckBox
+                android:id="@+id/rememberMe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:text="@string/remember_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <Button
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:id="@+id/acceder"
+            android:text="@string/btn_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
     </LinearLayout>
 
-    <Button
-        android:layout_marginTop="20dp"
-        android:id="@+id/acceder"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rememberMeLayout"
-        android:text="@string/btn_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
