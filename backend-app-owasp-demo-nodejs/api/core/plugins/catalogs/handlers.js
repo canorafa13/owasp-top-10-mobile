@@ -24,6 +24,9 @@
             const methods = req.server.methods;
             const payload = req.pre.payload || req.payload;
 
+            if(isSecure){
+                payload.username = req.pre.resultAuthorization.username;
+            }
 
             const result = await methods.catalogs.createTasks(payload);
             if(isSecure){
@@ -41,6 +44,10 @@
             const methods = req.server.methods;
             const payload = req.pre.payload || req.payload;
             const id = req.params.id;
+
+            if(isSecure){
+                payload.username = req.pre.resultAuthorization.username;
+            }
 
 
             const result = await methods.catalogs.updateTasks(id, payload);
@@ -74,7 +81,7 @@
         try{
             const isSecure = req.pre.isSecure || false;
             const methods = req.server.methods;
-            const username = req.params.username;
+            let username = isSecure ? req.pre.resultAuthorization.username : req.params.username;
 
 
             const result = await methods.catalogs.getTasks(username);

@@ -44,10 +44,9 @@ interface OwaspSecureApi {
         @Path("id") id: String
     ): Response<ResponseBase<ObjectCryptiiBase>>
 
-    @GET("secure/owasp-demo/api/v1/tasks/{username}")
+    @GET("secure/owasp-demo/api/v1/tasks")
     suspend fun getTasks(
-        @Header("authorization") authorization: String,
-        @Path("username") username: String
+        @Header("authorization") authorization: String
     ): Response<ResponseBase<ObjectCryptiiBase>>
 
     /// Actividades

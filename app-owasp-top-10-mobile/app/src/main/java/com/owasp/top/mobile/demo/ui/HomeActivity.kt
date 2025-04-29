@@ -1,12 +1,15 @@
 package com.owasp.top.mobile.demo.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.owasp.top.mobile.demo.databinding.ActivityHomeBinding
+import com.owasp.top.mobile.demo.domain.HomeViewModel
 import com.owasp.top.mobile.demo.ui.adapters.OptionsHomeAdapter
 import com.owasp.top.mobile.demo.ui.adapters.OptionsItemHome
 import com.owasp.top.mobile.demo.ui.common.AlertDialogApp
@@ -18,6 +21,7 @@ class HomeActivity: AppCompatActivity()  {
     private lateinit var binding: ActivityHomeBinding
     private lateinit var adapterOptions: OptionsHomeAdapter
     private var listOptions: MutableList<OptionsItemHome> = mutableListOf()
+    private val homeViewModel: HomeViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +34,7 @@ class HomeActivity: AppCompatActivity()  {
             insets
         }
 
-        populateList()
+        //populateList()
 
         adapterOptions = OptionsHomeAdapter(listOptions)
 
@@ -38,6 +42,14 @@ class HomeActivity: AppCompatActivity()  {
             layoutManager = LinearLayoutManager(this@HomeActivity)
             setHasFixedSize(true)
             adapter = adapterOptions
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    override fun onResume() {
+        super.onResume()
+        homeViewModel.provideUserData()?.let {
+            binding.fullName.text = "${it.name} ${it.last_name}"
         }
     }
 

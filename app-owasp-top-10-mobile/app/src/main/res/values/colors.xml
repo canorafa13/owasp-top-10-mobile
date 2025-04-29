@@ -4,4 +4,65 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="color_default">#ff5733</color>
+
+
+    <color name="colorPrimary">#ff5733</color>
+    <color name="colorPrimaryDark">#ff5733</color>
+    <color name="colorPrimaryDarker">#ff5733</color>
+    <color name="colorAccent">#83786f</color>
+
+    <color name="colorPrimaryTransparent">#37CE0058</color>
+
+    <color name="basic_gray">#212121</color>
+    <color name="basic_gray_transparent">#33212121</color>
+    <color name="transparent20">#B3FFFFFF</color>
+    <color name="red">#FF0002</color>
+    <color name="green">#00701a</color>
+    <color name="green_2">#A4D65E</color>
+    <color name="default_box_stroke_color">#fff</color>
+    <!-- For settings framework -->
+    <color name="base_lighter_gray">#ddd</color>
+    <!-- A dark gray, equivalent to 0xffaaaaaa -->
+    <color name="base_darker_gray">#aaa</color>
+    <color name="transparent">#00FFFFFF</color>
+    <color name="CardBackground">@color/white</color>
+    <color name="SpinnerBackground">#FBDBEC</color>
+    <color name="iconsTint">#D1D1D1</color>
+
+    <!-- / * * COLORES INSTITUCIONALES -->
+    <color name="pantone526c">#652D89</color>
+    <color name="pantone3268c">#00AE9E</color>
+    <color name="pantone431c">#5E6A71</color>
+    <color name="pantone158c">#F58025</color>
+    <color name="pantone7470c">#006990</color>
+
+    <color name="pantoneRubineRedC">#CE0058</color>
+    <color name="pantone221c">#910048</color>
+    <color name="pantone137c">#ffa300</color>
+    <color name="pantoneWarmGray9c">#83786f</color>
+
+    <color name="popup_dialog_iconografy">#CE0058</color>
+    <!-- COLORES INSTITUCIONALES * * / -->
+
+    <!-- / * * STATUS -->
+    <color name="status_success">#4CA700</color>
+    <color name="status_warning">#F58025</color>
+    <color name="status_error">#F01100</color>
+    <color name="status_error_et">#C8FF2929</color>
+    <color name="gold">#FFA100</color>
+    <!-- STATUS * * / -->
+    <color name="dot_active">@color/pantone221c</color>
+    <color name="dot_inactive">@color/pantoneRubineRedC</color>
+
+
+    <color name="color_arc">@android:color/white</color>
+    <color name="color_text">@android:color/white</color>
+    <color name="color_progress">#58D4DE</color>
+
+
+    <!--    Ripple-->
+    <color name="ripple_light">#33FFFFFF</color>
+
+    <!--    bottom sheet-->
+    <color name="black_translucent">#30000000</color>
 </resources>

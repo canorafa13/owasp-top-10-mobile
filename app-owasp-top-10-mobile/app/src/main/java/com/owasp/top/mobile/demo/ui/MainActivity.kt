@@ -1,5 +1,6 @@
 package com.owasp.top.mobile.demo.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -18,7 +19,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val viewModel: MainViewModel by viewModels()
     private var dialogLoader: DialogLoader? = null
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,7 +70,8 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.responseObservable().observe(this){ response ->
             response?.let {
-                showToast("Logueado correctamente ${it.name} ${it.last_name}")
+                startActivity(Intent(this@MainActivity, HomeActivity::class.java))
+                finish()
             } ?: run { showToast("Ocurrio un error inesperado") }
         }
 

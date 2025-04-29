@@ -3,6 +3,12 @@
     <style name="Base.Theme.VulnerableAppOWASPDemo" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:colorEdgeEffect">@color/pantone137c</item>
+
     </style>
 
     <style name="Theme.VulnerableAppOWASPDemo" parent="Base.Theme.VulnerableAppOWASPDemo" />

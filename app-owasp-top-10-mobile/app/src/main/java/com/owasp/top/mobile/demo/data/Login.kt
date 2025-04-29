@@ -1,5 +1,7 @@
 package com.owasp.top.mobile.demo.data
 
+import com.owasp.top.mobile.demo.ui.data.UserData
+
 
 sealed class Login {
     data class Request(
@@ -14,5 +16,9 @@ sealed class Login {
         val url_profile: String?,
         val status: String?,
         val token: String?
-    ) : Login()
+    ) : Login() {
+        fun toUserData(): UserData = UserData(
+            id, name, last_name, url_profile, status, token
+        )
+    }
 }

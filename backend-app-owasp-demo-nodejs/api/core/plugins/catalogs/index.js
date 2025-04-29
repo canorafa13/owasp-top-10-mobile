@@ -96,7 +96,7 @@
                 }
             }, {
                 method: 'GET',
-                path: '/tasks/{username}',
+                path: '/tasks',
                 options: {
                     description: 'Obtener Tareas por usuario',
                     notes: 'Obtener tareas por usuario',
@@ -110,8 +110,7 @@
                         headers: baseSchema.authorization,
                         options: {
                             allowUnknown: true
-                        },
-                        params: taskSchema.params.username
+                        }
                     }
                 }
             }, {

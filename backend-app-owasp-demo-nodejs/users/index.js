@@ -13,7 +13,7 @@
     responder.on('signIn', async (req) => {
         const user = await repository.signIn(req.username, req.password);
         if(user.length > 0){
-            if(user[0].status === 'ACTIVE'){
+            if(user[0].status === 'ACTIVE' || user[0].status === 'CREATED'){
                 return user[0];
             }else{
                 return 'Usuario inactivo';

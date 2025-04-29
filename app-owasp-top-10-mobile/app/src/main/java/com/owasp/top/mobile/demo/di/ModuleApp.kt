@@ -11,6 +11,8 @@ import com.owasp.top.mobile.demo.BuildConfig
 import com.owasp.top.mobile.demo.apis.OwaspInsecureApi
 import com.owasp.top.mobile.demo.apis.OwaspSecureApi
 import com.owasp.top.mobile.demo.environment.FlavorApp
+import com.owasp.top.mobile.demo.ui.data.InjectData
+import com.owasp.top.mobile.demo.ui.data.UserData
 import com.owasp.top.mobile.demo.utils.HelperSecure
 import dagger.Module
 import dagger.Provides
@@ -117,6 +119,10 @@ object ModuleApp {
             return context.getSharedPreferences(context.packageName + "_shared_data", Context.MODE_PRIVATE)
         }
     }
+
+    @Provides
+    @Singleton
+    fun provideUserData() = InjectData<UserData>()
 
 
 }

@@ -10,6 +10,9 @@
                 return rows;
             })
             .catch((error) => {
+                if(error.code == 'ER_DUP_ENTRY'){
+                    throw "El usuario ya existe"
+                }
                 throw error;
             });
     }

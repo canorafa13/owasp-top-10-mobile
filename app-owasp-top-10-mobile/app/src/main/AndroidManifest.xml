@@ -37,6 +37,14 @@
             android:name=".ui.HomeActivity"
             android:exported="false">
         </activity>
+        <activity
+            android:name=".ui.RegistroTwoActivity"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".ui.RegistroOneActivity"
+            android:exported="false">
+        </activity>
     </application>
 
 </manifest>

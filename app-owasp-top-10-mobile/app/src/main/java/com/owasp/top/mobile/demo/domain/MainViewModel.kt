@@ -7,13 +7,17 @@ import androidx.lifecycle.viewModelScope
 import com.owasp.top.mobile.demo.data.IOResult
 import com.owasp.top.mobile.demo.data.Login
 import com.owasp.top.mobile.demo.domain.repository.OwaspRepository
+import com.owasp.top.mobile.demo.environment.FlavorApp
+import com.owasp.top.mobile.demo.ui.data.InjectData
+import com.owasp.top.mobile.demo.ui.data.UserData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val owaspRepository: OwaspRepository
+    private val owaspRepository: OwaspRepository,
+    private val userData: InjectData<UserData>
 ): ViewModel(){
 
     private val _isLoading = MutableLiveData(false)
@@ -52,6 +56,11 @@ class MainViewModel @Inject constructor(
                     } else {
                         owaspRepository.saveCredentials("", "")
                     }
+                    if (FlavorApp.isSecure()){
+                        userData.value = result.data.toUserData()
+                    } else {
+                        owaspRepository.saveUserData(result.data.toUserData())
+                    }
                     _response.postValue(result.data)
                 }
                 is IOResult.Error -> {
@@ -66,8 +75,7 @@ class MainViewModel @Inject constructor(
     fun signUp(username: String, password: String, name: String, last_name: String, phone: String) {
         viewModelScope.launch {
             _isLoading.postValue(true)
-            val result = owaspRepository.signUp(username, password, name, last_name, phone)
-            when(result) {
+            when(val result = owaspRepository.signUp(username, password, name, last_name, phone)) {
                 is IOResult.Success -> {
                     _isSuccessSignUp.postValue(true)
                 }
@@ -80,6 +88,8 @@ class MainViewModel @Inject constructor(
             _isLoading.postValue(false)
         }
     }
+
+    fun getUserData() = owaspRepository.getUserData()
 
     fun getCredentials(){
         viewModelScope.launch {

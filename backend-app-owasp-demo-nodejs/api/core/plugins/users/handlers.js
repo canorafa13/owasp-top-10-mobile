@@ -48,7 +48,8 @@
 
             payload.rol_id = 3;
 
-            let respuesta = await methods.users.signUp(payload)[0];
+            let respuesta = (await methods.users.signUp(payload))[0];
+
             if(isSecure){
                 return baseResponse.success(await cryptii.encrypt(respuesta));
             }

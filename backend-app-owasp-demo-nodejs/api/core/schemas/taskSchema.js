@@ -4,6 +4,11 @@
     const Joi = require('joi');
 
     exports.tasks = Joi.object({
+        title: Joi.string().required().max(50),
+        description: Joi.string().required().max(200),
+    });
+
+    exports.tasksUsername = Joi.object({
         username: Joi.string().required().max(40),
         title: Joi.string().required().max(50),
         description: Joi.string().required().max(200),

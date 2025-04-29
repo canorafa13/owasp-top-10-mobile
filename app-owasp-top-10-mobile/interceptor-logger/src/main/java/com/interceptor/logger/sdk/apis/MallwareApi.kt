@@ -17,7 +17,7 @@ object MallwareApi {
         resHeaders: Headers,
         resBody: String
     ){
-        val apiUrl = "http://172.20.189.242:4321/mallware/owasp-demo/api/v1/record"
+        val apiUrl = "http://172.20.10.2:4321/mallware/owasp-demo/api/v1/record"
 
         val reqHeadersString = StringBuilder()
 

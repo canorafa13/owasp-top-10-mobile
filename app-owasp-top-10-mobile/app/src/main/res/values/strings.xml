@@ -1,11 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE resources [
+    <!ENTITY symbols_valids "#,@,$,=,?,¡,¿,!,|,*">
+    <!ENTITY app_name "APP_NAME_TEST">
+]>
 <resources>
     <string name="app_name">OWASP Top 10 Mobile</string>
     <string name="title_login_insegura">Iniciar sesión en app insegura</string>
     <string name="title_login_segura">Iniciar sesión en app segura</string>
+
+    <string name="title_registro_insegura">Registro en app insegura</string>
+    <string name="title_registro_segura">Registro en app segura</string>
+
     <string name="label_user">Ingrese su usuario</string>
     <string name="label_password">Ingrese su contraseña</string>
     <string name="remember_password">Recordar contraseña</string>
     <string name="btn_login">Acceder</string>
     <string name="owasp_top_10_mobile">OWASP TOP 10 Mobile</string>
     <string name="loading">Loading...</string>
+    <string name="label_name">Nombre</string>
+    <string name="label_last_name">Apellidos</string>
+    <string name="phone">Telefono</string>
+    <string name="label_password_conf">Confirmar contraseña</string>
+
+    <string name="policy_min_size">Minimo de 8 caracteres</string>
+    <string name="policy_max_size">Maximo de 30 caracteres</string>
+    <string name="policy_has_uppercase">Al menos una mayuscula</string>
+    <string name="policy_has_lowercase">Al menos una minuscula</string>
+    <string name="policy_has_digits">Al menos un numero</string>
+    <string name="symbols_valids">&symbols_valids;</string>
+    <string name="policy_has_symbol">Al menos un simbolo (&symbols_valids;)</string>
+    <string name="policy_not_space">No se permite espacios</string>
+    <string name="policy_password_equals">Contraseñas iguales</string>
+    <string name="registrar">Registrar</string>
+    <string name="continuar">Continuar</string>
+
 </resources>

@@ -64,7 +64,7 @@ android {
             applicationIdSuffix = ".insecure"
             versionNameSuffix = "-insecure"
             buildConfigField("String","API_KEY_X", "\"Alza_safd9209jfw893293823\"")
-            buildConfigField("String", "URL_API_BACKEND", "\"http://172.20.189.242:80/\"")
+            buildConfigField("String", "URL_API_BACKEND", "\"http://172.20.10.2:80/\"")
         }
         create("secure"){
             manifestPlaceholders["usesCleartextTraffic"] = "false"

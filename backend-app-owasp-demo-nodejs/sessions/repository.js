@@ -66,7 +66,8 @@
                     
                     let response = {
                         isValid: false,
-                        message: ''
+                        message: '',
+                        username: null
                     }
 
                     if(err){
@@ -90,7 +91,7 @@
                     
                     if(queryResult[0].also == decoded.data){
                         /// La firma random por sesion es correcta
-                        resolve({...response, isValid: true});
+                        resolve({...response, isValid: true, username: decoded.username});
                         return;
                     }
                     resolve({...response, message: "Sesión comprometida, inicie sesión nuevamente para obtener un Token nuevo"});
@@ -100,7 +101,7 @@
             return result;
         }catch(e) {
             console.log(e);
-            return { isValid: false, message: "Sesión no comprobada"};
+            return { isValid: false, message: "Sesión no comprobada", username: null};
         }
     }
 })();

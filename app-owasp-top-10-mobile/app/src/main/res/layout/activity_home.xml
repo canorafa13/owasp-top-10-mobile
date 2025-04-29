@@ -16,11 +16,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
+
+    <TextView
+        android:id="@+id/full_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        android:text="@string/owasp_top_10_mobile"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list"
         tools:itemCount="20"
         tools:listitem="@layout/layout_options"
-        app:layout_constraintTop_toBottomOf="@+id/title"
+        app:layout_constraintTop_toBottomOf="@+id/full_name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

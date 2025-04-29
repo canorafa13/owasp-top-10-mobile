@@ -27,7 +27,7 @@
                     tags: ['api', 'crear', 'tasks'],
                     handler: handlers.createTasks,
                     validate: {
-                        payload: taskSchema.tasks
+                        payload: taskSchema.tasksUsername
                     }
                 }
             }, {
@@ -39,7 +39,7 @@
                     tags: ['api', 'Actualizar', 'tasks'],
                     handler: handlers.updateTasks,
                     validate: {
-                        payload: taskSchema.tasks,
+                        payload: taskSchema.tasksUsername,
                         params: taskSchema.params.id
                     }
                 }

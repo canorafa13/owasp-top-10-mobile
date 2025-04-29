@@ -31,7 +31,7 @@
                     if(!result.isValid) {
                         throw Boom.unauthorized(result.message);
                     }
-                    return result.isValid;
+                    return { isValid: result.isValid, username: result.username };
                 }catch(e){
                     if(e.isBoom && e.output.statusCode == 401){
                         throw Boom.unauthorized(e.output.message || e.output.payload.message);
@@ -56,7 +56,7 @@
 
     exports.validateServer = { method: _validateServer, assign: 'isSecure' }
 
-    exports.verifyToken = { method: _verifyToken, assign: 'isAuthorization' }
+    exports.verifyToken = { method: _verifyToken, assign: 'resultAuthorization' }
 
     exports.validationApiKeyX = { method: _validateKey, assign: 'isApiKeyValid' }
 
